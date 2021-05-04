@@ -1,4 +1,4 @@
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -17,16 +17,29 @@ module.exports = {
         filename: 'js/bundle.js',
         clean: true,
     },
+    module: {
+        rules: [
+            {
+                test: /\.(js)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader', 'eslint-loader'],
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['*', '.js'],
+    },
     plugins: [
         new CopyPlugin({
             patterns: [
-                { from: "src",
-                  globOptions: {
-                      ignore: [
-                          '**/js/*',
-                      ]
-                }
-            }],
+                {
+                    from: 'src',
+                    globOptions: {
+                        ignore: [
+                            '**/js/*',
+                        ],
+                    },
+                }],
             options: {
                 concurrency: 100,
             },
