@@ -16,6 +16,6 @@ app.engine('hbs', exphbs({
 
 app.set('view engine', 'hbs');
 
-// Our requests hadlers will be implemented here...
+
 
 app.listen(3000);
