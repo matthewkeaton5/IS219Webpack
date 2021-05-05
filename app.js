@@ -7,7 +7,6 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// To parse cookies from the HTTP Request
 app.use(cookieParser());
 
 app.engine('hbs', exphbs({
@@ -16,6 +15,12 @@ app.engine('hbs', exphbs({
 
 app.set('view engine', 'hbs');
 
-
-
 app.listen(3000);
+
+app.get('/', function (req, res) {
+    res.render('home');
+});
+
+app.get('/register', (req, res) => {
+    res.render('register');
+});
