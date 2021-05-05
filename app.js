@@ -25,6 +25,10 @@ app.get('/register', (req, res) => {
     res.render('register');
 });
 
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
 const getHashedPassword = (password) => {
     const sha256 = crypto.createHash('sha256');
     const hash = sha256.update(password).digest('base64');
