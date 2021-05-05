@@ -29,5 +29,28 @@ Working site here:
 
 http://www.webizly.com/BasicWebPack/
 
-Postman
-![GET](IMGs/CrudPostman.png)
+## Basic Web Authentication
+
+User that is not logged in cannot access /protected
+
+![Protected](IMGs/UserNotLoggedIn.png)
+
+Home
+
+![Home](IMGs/Home.png)
+
+Registration
+
+![Registration](IMGs/Registration.png)
+
+Registration Completed, Log in
+
+![Login](IMGs/RegistrationComplete-Login.png)
+
+Successful Login
+
+![GET](IMGs/Protected.png)
+
+
+
+
