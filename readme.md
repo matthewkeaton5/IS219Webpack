@@ -30,4 +30,8 @@ Working site here:
 http://www.webizly.com/BasicWebPack/
 
 Postman
-![GET](IMGs/CrudPostman.png)
+![GET Auth Token](IMGs/AuthToken.png)
+
+![Auth Token in Use](IMGs/AuthTokenInUse.png)
+
+![Book Added](IMGs/BookAdded.png)
