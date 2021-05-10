@@ -52,6 +52,10 @@ const authenticateJWT = (req, res, next) => {
     }
 };
 
+app.get('/books', authenticateJWT, (req, res) => {
+    res.json(books);
+});
+
 app.use(bodyParser.json());
 
 app.listen(4000, () => {
