@@ -4,11 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 
-app.use(bodyParser.json());
-
-app.listen(4000, () => {
-    console.log('Books service started on port 4000');
-});
+const accessTokenSecret = 'youraccesstokensecret';
 
 const books = [
     {
@@ -36,3 +32,34 @@ const books = [
         "year": 1315
     },
 ];
+
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
+
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+
+            req.user = user;
+            next();
+        });
+    } else {
+        res.sendStatus(401);
+    }
+};
+
+app.use(bodyParser.json());
+
+app.listen(4000, () => {
+    console.log('Books service started on port 4000');
+});
+
+
+
+app.get('/books', (req, res) => {
+    res.json(books);
+});
