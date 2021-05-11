@@ -47,6 +47,18 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(expressSession(session));
 
+passport.use(strategy);
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+    done(null, user);
+});
+
 app.get("/", (req, res) => {
     res.render("index", { title: "Home" });
 });
