@@ -29,5 +29,13 @@ Working site here:
 
 http://www.webizly.com/BasicWebPack/
 
-Postman
-![GET](IMGs/CrudPostman.png)
+Auth0
+![Home](IMGs/Home.jpg)
+
+![Login](IMGs/Login.png)
+
+![Authorize](IMGs/Authorize.png)
+
+![LogggedIn](IMGs/LoggedIn.jpg)
+
+
