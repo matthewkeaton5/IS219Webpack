@@ -7,6 +7,10 @@ const Auth0Strategy = require("passport-auth0");
 const app = express();
 const port = process.env.PORT || "8000";
 
+const authRouter = require("./auth");
+
+require("dotenv").config();
+
 const session = {
     secret: process.env.SESSION_SECRET,
     cookie: {},
@@ -26,7 +30,6 @@ const strategy = new Auth0Strategy(
     }
 );
 
-require("dotenv").config();
 
 if (app.get("env") === "production") {
     // Serve secure cookies, requires HTTPS
@@ -58,6 +61,8 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
     done(null, user);
 });
+
+app.use("/", authRouter);
 
 app.get("/", (req, res) => {
     res.render("index", { title: "Home" });
