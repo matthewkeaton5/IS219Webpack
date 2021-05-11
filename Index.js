@@ -30,19 +30,34 @@ const strategy = new Auth0Strategy(
     }
 );
 
+const secured = (req, res, next) => {
+    if (req.user) {
+        return next();
+    }
+    req.session.returnTo = req.originalUrl;
+    res.redirect("/login");
+};
 
 if (app.get("env") === "production") {
     // Serve secure cookies, requires HTTPS
     session.cookie.secure = true;
 }
 
-app.get("/", (req, res) => {
-    res.status(200).send("WHATABYTE: Food For Devs");
+app.get("/user", secured, (req, res, next) => {
+    const { _raw, _json, ...userProfile } = req.user;
+    res.render("user", {
+        title: "Profile",
+        userProfile: userProfile
+    });
 });
 
-app.listen(port, () => {
-    console.log(`Listening to requests on http://localhost:${port}`);
+
+
+app.get("/", (req, res) => {
+    res.render("index", { title: "Home" });
 });
+
+
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -62,9 +77,18 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.isAuthenticated();
+    next();
+});
+
 app.use("/", authRouter);
 
 app.get("/", (req, res) => {
     res.render("index", { title: "Home" });
+});
+
+app.listen(port, () => {
+    console.log(`Listening to requests on http://localhost:${port}`);
 });
 

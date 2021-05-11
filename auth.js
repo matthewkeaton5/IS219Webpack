@@ -3,31 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const querystring = require("querystring");
 
-const port = req.connection.localPort;
-
-const logoutURL = new URL(
-    `https://${process.env.AUTH0_DOMAIN}/v2/logout`
-);
-
-const searchString = querystring.stringify({
-    client_id: process.env.AUTH0_CLIENT_ID,
-    returnTo: returnTo
-});
-
-logoutURL.search = searchString;
-
 require("dotenv").config();
-
-let returnTo = req.protocol + "://" + req.hostname;
-
-if (port !== undefined && port !== 80 && port !== 443) {
-    returnTo =
-        process.env.NODE_ENV === "production"
-            ? `${returnTo}/`
-            : `${returnTo}:${port}/`;
-}
-
-
 
 router.get(
     "/login",
